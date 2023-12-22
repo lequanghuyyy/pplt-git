@@ -68,7 +68,6 @@ int main()
     char w[100];
     int bc=0 , bg=0 ;
     float nd;
-    // Đọc dữ liệu từ tập tin input.text
     FILE *input = fopen("input.text", "r");
     if (input == NULL) {
         printf("Loi khi mo file input.text\n");
@@ -198,22 +197,52 @@ if (strcmp(w, "Rain") == 0)
     { y : 
 	float nd1 = n;
     int ldconlai=ld;
+    if(nep1banhchung>nep1banhgiay)
+    {
       do {
       if(nd1<nep1banhchung&&nd1<nep1banhgiay) break;
 	  if(nd1>nep1banhchung)
 		{
+			if(ldconlai<lddc) break;
 		  bc=bc+1;
-     	 ldconlai = ld - lddc;
+     	 ldconlai = ldconlai - lddc;
+     	 printf("ldconlai0 = \n",ldconlai);
      	if(ldconlai<0) break;
      	nd1 = nd1 - nep1banhchung;}
      	if(nd1>nep1banhgiay)
     	{
+    		if(ldconlai<lddg) break;
 		 bg=bg+1;
 	    ldconlai = ldconlai - lddg;
+	     printf("ldconlai1 = \n",ldconlai);
+	    if(ldconlai<0) break;
 	    nd1 = nd1 - nep1banhgiay;}
         }
     while(nd1>nep1banhchung||nd1>nep1banhgiay);
+}
+if(nep1banhchung<nep1banhgiay)
+{
+	do {
+      if(nd1<nep1banhchung&&nd1<nep1banhgiay) break;
+     	if(nd1>nep1banhgiay)
+    	{
+    		if(ldconlai<lddg) break;
+		 bg=bg+1;
+	    ldconlai = ldconlai - lddg;
+	    if(ldconlai<0) break;
+	    nd1 = nd1 - nep1banhgiay;}
+	    if(nd1>nep1banhchung)
+		{
+			if(ldconlai<lddc) break;
+		  bc=bc+1;
+     	 ldconlai = ldconlai - lddc;
+     	if(ldconlai<0) break;
+     	nd1 = nd1 - nep1banhchung;}
+        }
+    while(nd1>nep1banhchung||nd1>nep1banhgiay);
+}
      nd = nd1;
+    printf("%d %d %.3f\n", bc, bg, nd);
      goto e;
 	}
 	if(strcmp(w, "Fog") == 0)
@@ -292,6 +321,7 @@ if(strcmp(w, "Sun")==0)
 	   printf("%d\n",X);
 	   n = n + n*X/100;
 	   ld = ld - X;
+	   printf("%d\n",ld);
 	   if(giatri==0)
 	   {
 	   	goto y;
@@ -350,7 +380,7 @@ if(strcmp(w,"Cloud")==0)
 }
 }
 e: 
-	printf("Truong hop : %d %d %.3f", bc , bg , nd);
+printf("%d %d %.3f\n", bc, bg, nd);
 	 FILE *output = fopen("output.out", "w");
     if (output == NULL) {
         printf("Loi khi mo file output.out\n");
